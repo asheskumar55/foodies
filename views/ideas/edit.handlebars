@@ -1,0 +1,23 @@
+{{#each errors}}
+  <div class="alert alert-danger">{{text}}</div>
+{{else}}
+
+{{/each}}
+
+<div class="container">
+    <h1>Edit Food</h1>
+
+<form action="/ideas/{{idea.id}}?_method=PUT" method="post" class="mb-5">
+  <input type="hidden" name="_method" value="PUT">
+  <div class="form-group">
+    <label for="title">Food Name</label>
+    <input type="text" class="form-control" name="title" value="{{idea.title}}" placeholder="Enter Food Name" required="">
+  </div>
+  <div class="form-group">
+    <label for="details">Food Price</label>
+    <input type="text" class="form-control" name="details" value="details" placeholder="Enter Food Price" required="">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+

@@ -1,0 +1,66 @@
+<div class="container">
+    <h1>Add Food</h1>
+
+<form action="/ideas" method="post" class="mb-5">
+  <div class="form-group">
+    <label for="title">Food Name</label>
+    <input type="text" class="form-control" name="title" placeholder="Enter Food Name" required="">
+  </div>
+  <div class="form-group">
+    <label for="details">Food Price</label>
+    <input type="text" class="form-control" name="details" placeholder="Enter Food Price" required="">
+  </div>
+  <button type="submit" class="btn btn-primary" name="btn_tweet">Submit</button>
+</form>
+</div>
+<!-- Jquery and ajax -->
+<script>
+  $(document).ready(function(){
+    $('#btn_tweet').click(function(){
+      var tweet_txt = $('#tweet').val();
+      if($.trim(tweet_txt)!= '')
+      {
+        $.ajax({
+          url:"insert.php",
+          method:"POST",
+          data:{tweet:tweet_txt},
+          dataType:"text",
+          success:function(data)
+          {
+            $('#tweet').val("");
+          }
+        });
+      }
+    });
+    setInterval(function(){
+      $('#load_tweets').load("/").fadeIn("slow");
+    }, 1000);
+  });
+</script>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Item Name</th>
+      <th scope="col">Item Price</th>
+      <th scope="col">Edit Food</th>
+      <th scope="col">Delete Food</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each ideas}}
+    <tr>
+      <td>{{title}}</td>
+      <td>{{details}}</td>
+      <td><a class="btn btn-dark" href="/ideas/edit/{{id}}">Edit</a></td>
+      <td><form method="post" action="/ideas/{{id}}?_method=DELETE">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" class="btn btn-danger" value="Delete">
+    </form></td>
+    </tr>
+    {{else}}
+    <p>There is no food to order</p>
+    {{/each}}
+  </tbody>
+</table>   
+

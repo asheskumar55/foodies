@@ -1,0 +1,26 @@
+<div class="container">
+<img src="/img/1.png" class="img-fluid mb-3 ml-5" alt="Responsive image">
+  
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Item Name</th>
+      <th scope="col">Item Price</th>
+      <th scope="col">Item Order</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {{#each ideas}}
+    <tr>
+      <td>{{title}}</td>
+      <td>{{details}}</td>
+      <td><a href="/users/order/{{id}}" class="btn btn-success">Order</a></td>
+    </tr>
+    {{else}}
+    <p>There is no food to order</p>
+    {{/each}}
+  </tbody>
+</table>   
